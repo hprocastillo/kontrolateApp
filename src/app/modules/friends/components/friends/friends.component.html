@@ -1,0 +1,33 @@
+<ng-container *ngIf="authSvc.user$ | async as user">
+  <div class="row">
+    <div class="col-12">
+      <ul #nav="ngbNav" [(activeId)]="active" class="nav-tabs font-weight-bold" ngbNav>
+
+        <!---------- OUTS ---------->
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Amigos</a>
+          <ng-template ngbNavContent>
+
+            <!-- PAGE FRIENDS -->
+            <ng-container *ngIf="pageListFriends === true">
+              <app-list-friends
+                [user]="user"
+              ></app-list-friends>
+            </ng-container>
+
+          </ng-template>
+        </li>
+
+        <!----------- IN'S ----------->
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Solicitudes</a>
+          <ng-template ngbNavContent>
+
+          </ng-template>
+        </li>
+
+      </ul>
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+  </div>
+</ng-container>

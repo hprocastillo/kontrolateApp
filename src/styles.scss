@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+.amount-fixed {
+  color: lightseagreen;
+  font-weight: bold;
+}
+
+.amount-diff {
+  color: red;
+  font-weight: bold;
+}
+
+.label-newForm {
+  font-weight: bold;
+  color: #fff
+}
+
+svg {
+  margin-top: -3px;
+}
+
+li {
+  cursor: pointer;
+}

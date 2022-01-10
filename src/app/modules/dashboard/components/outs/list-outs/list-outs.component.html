@@ -1,0 +1,30 @@
+<ng-container *ngIf="listOuts.length > 0 || listOutShares.length > 0; else noResults">
+  <!-- LIST OUTS -->
+  <ng-container *ngIf="listOuts.length > 0">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let out of listOuts" class="list-group-item" (click)="getViewOut(out.id)">
+        <app-list-outs-view [outId]="out.id"></app-list-outs-view>
+      </li>
+    </ul>
+  </ng-container>
+
+  <!-- LIST OUT SHARE -->
+  <ng-container *ngIf="listOutShares.length > 0">
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let out of listOutShares" class="list-group-item" (click)="getViewOut(out.outId)">
+        <app-list-outs-view [outId]="out.outId"></app-list-outs-view>
+      </li>
+    </ul>
+  </ng-container>
+
+  <br>
+  <br>
+  <br>
+  <br>
+</ng-container>
+
+<ng-template #noResults>
+  <div class="alert alert-success" role="alert">
+    ¡No tienes salidas registradas aún!
+  </div>
+</ng-template>

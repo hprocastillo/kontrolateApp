@@ -1,0 +1,70 @@
+<ng-container *ngIf="pageDefault === true">
+  <div class="row">
+    <div class="col-12">
+      <button (click)="showForm()" class="btn btn-primary btn-block" type="button">
+        <svg class="bi bi-plus-square-fill mr-2" fill="currentColor" height="16" viewBox="0 0 16 16"
+             width="16" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
+        </svg>
+        Añadir Salida
+      </button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="pageForm === true">
+  <form (ngSubmit)="getSave(user)" [formGroup]="newForm">
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label label-newForm" for="description">Salida:</label>
+      <div class="col-9">
+        <input
+          class="form-control"
+          formControlName="description"
+          id="description"
+          name="description"
+          placeholder="Ej: La comida del mes"
+          type="text"
+        >
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label label-newForm" for="goal">Meta:</label>
+      <div class="col-9">
+        <input
+          class="form-control"
+          formControlName="amountGoal"
+          id="goal"
+          name="amountGoal"
+          placeholder="S/. 500"
+          type="number"
+        >
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <button type="reset" class="btn btn-danger btn-block" (click)="getCancel()">
+          <svg class="bi bi-x-circle-fill mr-2" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+          </svg>
+          Cancelar
+        </button>
+      </div>
+      <div class="col-6">
+        <button type="submit" class="btn btn-success btn-block">
+          <svg class="bi bi-hdd-fill mr-2" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0 10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-1zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM.91 7.204A2.993 2.993 0 0 1 2 7h12c.384 0 .752.072 1.09.204l-1.867-3.422A1.5 1.5 0 0 0 11.906 3H4.094a1.5 1.5 0 0 0-1.317.782L.91 7.204z"/>
+          </svg>
+          Guardar
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-container>

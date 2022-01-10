@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12">
+    <h3 class="text-center">KontrolaTE!</h3>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col-12">
+    <ul #nav="ngbNav" [(activeId)]="active" class="nav-tabs" ngbNav>
+
+      <!-- CURRENTS -->
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>Inicia sesión</a>
+        <ng-template ngbNavContent>
+
+          <app-login></app-login>
+
+        </ng-template>
+      </li>
+
+      <!-- HISTORICAL -->
+      <li [ngbNavItem]="2">
+        <a ngbNavLink>Registrarte</a>
+        <ng-template ngbNavContent>
+
+          <app-register></app-register>
+
+        </ng-template>
+      </li>
+
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>
