@@ -9,7 +9,9 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
 
-  constructor(public authSvc: AuthService, private router: Router) {
+  constructor(
+    public authSvc: AuthService,
+    private router: Router) {
   }
 
   async loginGoogle() {
@@ -19,6 +21,9 @@ export class LoginComponent {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  loginFacebook() {
   }
 
 }

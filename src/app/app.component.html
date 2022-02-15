@@ -1,12 +1,12 @@
-<ng-container *ngIf="authSvc.user$ | async as user; else noLogin">
+<ng-container *ngIf="authSvc.user$; else noLogin">
   <app-navbar></app-navbar>
-  <div class="container mt-2">
+  <div class="container">
     <router-outlet></router-outlet>
   </div>
 </ng-container>
 
 <ng-template #noLogin>
-  <div class="container mt-2">
+  <div class="container">
     <router-outlet></router-outlet>
   </div>
 </ng-template>

@@ -1,0 +1,86 @@
+<div class="row">
+
+  <!-- Button open tool bar  -->
+  <div class="col-1 p-0">
+    <button (click)="showToolbar()" class="btn btn-link btn-sm p-0" type="button">
+
+      <!-- If toolbar is closed -->
+      <svg *ngIf="!toolbar" class="bi bi-chevron-down" fill="currentColor" height="14" viewBox="0 0 16 16"
+           width="14" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          fill-rule="evenodd"/>
+      </svg>
+
+      <!-- If toolbar is open -->
+      <svg *ngIf="toolbar" class="bi bi-chevron-up" fill="currentColor" height="14" viewBox="0 0 16 16"
+           width="14" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+              fill-rule="evenodd"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Out description  -->
+  <div class="col-8 p-0">
+    <!-- label description and current amount -->
+    <p class="p-0 m-0 text-capitalize">{{out.description}}</p>
+    <!-- label fixed goal amount -->
+    <p class="p-0 m-0 amount-fixed small">Meta de monto fijo:</p>
+    <!-- label exceeded goal amount -->
+    <p *ngIf="out.currentAmount > out.goalAmount" class="p-0 m-0 amount-exceeded small">
+      Monto excedido:</p>
+  </div>
+
+  <!--Out amounts  -->
+  <div class="col-3 p-0 text-right">
+    <!-- Current amount -->
+    <p class="p-0 m-0">S/. &nbsp; {{out.currentAmount || 0}}</p>
+
+    <!-- Fixed goal amount -->
+    <p class="p-0 m-0 amount-fixed small">S/. &nbsp; {{out.goalAmount}}</p>
+
+    <!-- Exceeded amount -->
+    <p *ngIf="out.currentAmount > out.goalAmount" class="p-0 m-0 amount-exceeded small">
+      S/. &nbsp; {{out.currentAmount - out.goalAmount}}
+    </p>
+
+  </div>
+</div>
+
+
+<!-- Tool bar -->
+<div *ngIf="toolbar" class="row mt-2">
+  <div class="col-11 offset-1 p-0">
+    <!-- Button edit -->
+    <button (click)="selectOutId(outId)" class="btn btn-info btn-sm mr-2" type="button">
+      <svg class="bi bi-pencil-square" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+           xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+        <path
+          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          fill-rule="evenodd"/>
+      </svg>
+    </button>
+
+    <!-- Button delete -->
+    <button (click)="getModalDelete(out, outId)" class="btn btn-danger btn-sm mr-2" type="button">
+      <svg class="bi bi-trash3-fill" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+           xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+          fill-rule="evenodd"/>
+      </svg>
+    </button>
+
+    <!-- Button share -->
+    <button class="btn btn-warning btn-sm mr-2" type="button">
+      <svg class="bi bi-share-fill" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+           xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+      </svg>
+    </button>
+  </div>
+</div>

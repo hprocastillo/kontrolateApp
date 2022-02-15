@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
-import {Out, OutShare} from "../interfaces/out";
+import {Out} from "../interfaces/out";
 import {map} from "rxjs";
 
 @Injectable({
@@ -14,9 +14,9 @@ export class OutService {
     this.outCollection = afs.collection<Out>('outs');
   }
 
-  getOutsByUserId(userId: string) {
+  getOutsByOwnerId(ownerId: string) {
     return this.afs.collection<Out>('outs', ref => ref
-      .where('userId', '==', userId)
+      .where('ownerId', '==', ownerId)
       .orderBy('createdAt', 'desc'))
       .snapshotChanges().pipe(map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Out;
@@ -25,16 +25,6 @@ export class OutService {
       })));
   }
 
-  getOutsByShare(guessId: string) {
-    return this.afs.collection<OutShare>('outsShare', ref => ref
-      .where('guessId', '==', guessId)
-      .orderBy('createdAt', 'desc'))
-      .snapshotChanges().pipe(map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as OutShare;
-        const id = a.payload.doc.id;
-        return {id, ...data};
-      })));
-  }
 
   getOutById(id: string) {
     return this.afs.collection<Out>('outs').doc(id).valueChanges();

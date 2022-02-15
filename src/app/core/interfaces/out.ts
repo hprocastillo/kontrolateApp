@@ -3,56 +3,28 @@ import Timestamp = firebase.firestore.Timestamp;
 
 export interface Out {
   id?: string;
+  ownerId: string;
+
   description: string;
-  amount: number;
-  amountGoal: number;
+  currentAmount: number;
+  goalAmount: number;
+  exceededAmount: number;
   status: boolean;
+  shared: boolean;
 
-  userId: string;
-  userDisplayName: string;
-  userEmail: string;
-  userPhotoUrl: string;
-
+  createdBy: string;
   createdAt: Timestamp;
+  updatedBy: string;
   updatedAt: Timestamp;
 }
 
-export interface OutShare {
-  id?: string;
+export interface Partner {
+  id: string;
   outId: string;
-  status: boolean;
+  partnerId: string;
 
-  guessId: string;
-  guessDisplayName: string;
-  guessEmail: string;
-  guessPhotoUrl: string;
-
-  userId: string;
-  userDisplayName: string;
-  userEmail: string;
-  userPhotoUrl: string;
-
+  createdBy: string;
   createdAt: Timestamp;
-  updatedAt: Timestamp;
-}
-
-
-export interface OutRequest {
-  id?: string;
-  outId: string;
-  message: string;
-  status: boolean;
-
-  guessId: string;
-  guessDisplayName: string;
-  guessEmail: string;
-  guessPhotoUrl: string;
-
-  userId: string;
-  userDisplayName: string;
-  userEmail: string;
-  userPhotoUrl: string;
-
-  createdAt: Timestamp;
+  updatedBy: string;
   updatedAt: Timestamp;
 }

@@ -1,0 +1,33 @@
+<ng-container *ngIf="authSvc.user$ | async as user">
+
+  <!-- LIST OUTS -->
+  <ng-container *ngIf="pageListOuts">
+    <app-list-outs
+      (selectedOutId)="getSelectedOutId($event)"
+      [user]="user">
+    </app-list-outs>
+  </ng-container>
+
+
+  <!-- PAGE VIEW OUT -->
+  <ng-container *ngIf="pageViewOut">
+    <app-view-out
+      (btnBack)="getBack($event)"
+      (selectedExpenseId)="getSelectedExpenseId($event)"
+      [outId]="selectedOutId"
+      [user]="user">
+    </app-view-out>
+  </ng-container>
+
+
+  <!-- PAGE VIEW EXPENSE -->
+  <ng-container *ngIf="pageViewExpense">
+    <app-view-expense
+      (backToOut)="getBackToOut($event)"
+      [expenseId]="selectedExpenseId"
+      [outId]="selectedOutId"
+      [user]="user">
+    </app-view-expense>
+  </ng-container>
+
+</ng-container>

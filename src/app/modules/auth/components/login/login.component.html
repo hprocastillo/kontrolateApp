@@ -1,9 +1,28 @@
-<div class="card shadow p-3 mb-5 bg-white rounded">
-  <div class="card-body">
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">Kontrolate</h2>
+  </div>
+</div>
 
-    <button (click)="loginGoogle()" class="btn btn-google">
-      <img alt="button google" class="img-google" src="../../../../../assets/images/buttons/google.svg">
-      Continuar con Google
-    </button>
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <h5 class="text-center mb-4">Inicio de sesión</h5>
+
+        <!-- Login google -->
+        <button (click)="loginGoogle()" class="btn btn-block btn-social mb-4" type="button">
+          <img alt="login google" class="img-social" src="../../../../../assets/images/login/google.png">
+          Continuar con Google
+        </button>
+
+        <!-- Login facebook -->
+        <button (click)="loginFacebook()" class="btn btn-block btn-social mb-4" type="button">
+          <img alt="login facebook" class="img-social" src="../../../../../assets/images/login/facebook.png">
+          Continuar con Facebook
+        </button>
+
+      </div>
+    </div>
   </div>
 </div>

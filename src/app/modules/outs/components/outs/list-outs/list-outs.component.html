@@ -1,0 +1,34 @@
+<!-- LIST OUTS -->
+<ng-container *ngIf="listOuts.length > 0; else noResults">
+  <div class="row">
+    <div class="col-12">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let out of listOuts" class="list-group-item">
+
+          <app-list-outs-item
+            (selectedOutId)="getSelectedOutId($event)"
+            [outId]="out.id">
+          </app-list-outs-item>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-template #noResults>
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="alert alert-success" role="alert">
+        ¡No tienes conjuntos de gastos registrados aún!
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<!-- NEW OUT FORM -->
+<div class="fixed-bottom bg-dark p-3">
+  <app-new-out [user]="user"></app-new-out>
+</div>

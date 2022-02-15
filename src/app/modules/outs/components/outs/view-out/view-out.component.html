@@ -1,0 +1,38 @@
+<!-- OUT VIEW -->
+<div class="row mt-3">
+  <!-- Labels  -->
+  <div class="col-9">
+    <!-- Description -->
+    <h5 class="m-0">{{out.description}}</h5>
+    <!-- Goal fixed -->
+    <p class="m-0 amount-fixed small font-weight-bold">Meta establecida:</p>
+    <!-- Amount exceeded -->
+    <p *ngIf="out.currentAmount > out.goalAmount" class="m-0 amount-exceeded small font-weight-bold">Exceso:</p>
+  </div>
+
+  <!-- Amounts  -->
+  <div class="col-3 text-right">
+    <h6 class="m-0">S/. {{out.currentAmount || 0}}</h6>
+    <p class="m-0 amount-fixed small font-weight-bold">S/. &nbsp; {{out.goalAmount}}</p>
+    <p *ngIf="out.currentAmount > out.goalAmount" class="m-0 amount-exceeded small font-weight-bold">
+      S/.&nbsp;{{out.currentAmount - out.goalAmount}}</p>
+  </div>
+</div>
+<hr class="mt-2 mb-2">
+
+
+<!-- LIST EXPENSES -->
+<app-list-expenses
+  (selectedExpenseId)="getSelectedExpenseId($event)"
+  [outId]="outId"
+  [user]="user">
+</app-list-expenses>
+
+<!-- NEW EXPENSE FORM -->
+<div class="fixed-bottom bg-dark p-3">
+  <app-new-expense
+    (btnBack)="getBack($event)"
+    [outId]="outId"
+    [user]="user">
+  </app-new-expense>
+</div>

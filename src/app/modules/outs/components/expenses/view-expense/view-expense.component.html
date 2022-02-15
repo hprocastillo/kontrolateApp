@@ -1,0 +1,170 @@
+<!-- DEFAULT TEMPLATE -- IF EDIT FORM IS DISABLE -->
+<ng-container *ngIf="!editForm">
+  <div class="row mt-3">
+    <div class="col-10">
+      <h6 class="font-weight-bold text-capitalize">{{expense.description}}</h6>
+      <p class="m-0 font-weight-bold">S/. &nbsp; {{expense.amount || 0}}</p>
+      <p *ngIf="expense.createdAt"
+         class="small text-muted mt-1">{{expense.createdAt.toDate() | date:'MMM d, y h:mm a'}}</p>
+    </div>
+    <div class="col-2 text-right">
+      <button (click)="showExpenseForm()" class="btn btn-info btn-sm" type="button">
+        <svg class="bi bi-pencil-square" fill="currentColor" height="16" viewBox="0 0 16 16"
+             width="16" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+          <path
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+            fill-rule="evenodd"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <hr class="mt-1">
+    </div>
+  </div>
+</ng-container>
+
+
+<!-- EDIT FORM -- IF EDIT FORM IS ENABLE -->
+<ng-container *ngIf="editForm">
+  <form #form (ngSubmit)="getEdit(expenseId, out)">
+    <div class="form-row mt-3 p-2">
+      <div class="col-10">
+        <input
+          [(ngModel)]="expense.description"
+          class="form-control mb-2"
+          name="description"
+          type="text"
+        >
+        <input
+          [(ngModel)]="expense.amount"
+          class="form-control"
+          name="amount"
+          type="number"
+        >
+      </div>
+      <div class="col-2 text-right">
+        <button class="btn btn-success btn-sm" type="submit">
+          <svg class="bi bi-hdd-fill" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0 10a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-1zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM.91 7.204A2.993 2.993 0 0 1 2 7h12c.384 0 .752.072 1.09.204l-1.867-3.422A1.5 1.5 0 0 0 11.906 3H4.094a1.5 1.5 0 0 0-1.317.782L.91 7.204z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-container>
+
+
+<!-- RECEIPT SECTION -->
+<br>
+<div class="row">
+  <div class="col-12">
+    <h6>Recibo</h6>
+  </div>
+</div>
+<div class="row">
+  <!-- RECEIPT CONTAINER -->
+  <div class="col-8 text-center">
+
+    <!-- IMAGE PREVIEW -->
+    <!-- If image preview does -->
+    <ng-container *ngIf="imagePreview; else noImagePreview">
+      <img [src]="[imagePreview]" alt="" class="img-fluid img-preview">
+    </ng-container>
+
+    <!-- If image preview doesn't -->
+    <ng-template #noImagePreview>
+
+      <!-- If expense.receiptJURL exist -->
+      <ng-container *ngIf="expense.receiptURL; else noResults">
+        <img [src]="[expense.receiptURL]" alt="" class="img-fluid img-preview">
+      </ng-container>
+
+      <!-- If expense.receiptJURL no exist, show default image -->
+      <ng-template #noResults>
+        <img [src]="['./assets/images/expense/receipt.png']" alt="" class="img-fluid img-preview">
+        <div class="alert alert-success small mt-4" role="alert">
+          No ha adjuntado un recibo aun.
+        </div>
+      </ng-template>
+    </ng-template>
+    <br>
+
+    <!-- Progress bar section -->
+    <ng-container *ngIf="uploadPercent | async as percent">
+      <div class="progress">
+        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="25" class="progress-bar"
+             role="progressbar" style="width:{{percent}}%;">{{ uploadPercent | async }}%
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- BUTTONS CAMERA AND UPLOAD -->
+  <div class="col-4 text-center camera-container">
+    <label class="btn">
+      <input (change)="getPreview($event)" accept="image/*" capture="user" class="input-file" type="file">
+      <img [src]="['./assets/images/expense/camera.png']" alt="camera" class="img-fluid">
+    </label>
+    <p class="text-muted">Tomar foto</p>
+
+    <p class="text-muted">ó</p>
+
+    <label class="btn">
+      <input (change)="getPreview($event)" accept="image/*" class="input-file" type="file">
+      <img [src]="['./assets/images/expense/upload.png']" alt="file" class="img-fluid">
+    </label>
+    <p class="text-muted">Subir imagen</p>
+
+    <br>
+
+    <ng-container *ngIf="expense.receiptURL">
+      <button (click)="getDeleteReceipt(expenseId)" class="btn btn-danger btn-sm" type="button">
+        <svg class="bi bi-trash3-fill mr-2" fill="currentColor" height="16" viewBox="0 0 16 16"
+             width="16"
+             xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+        </svg>
+        Borrar
+      </button>
+    </ng-container>
+
+  </div>
+</div>
+
+<!-- NEW RECEIPT -->
+<!-- FOOTER FIXED -- BUTTON BACK -->
+<div class="fixed-bottom bg-dark p-3">
+  <div class="row">
+    <div class="col-4">
+      <!-- Button back -->
+      <button (click)="getBackToOut(outId)" class="btn btn-danger btn-block" type="button">
+        <svg class="bi bi-backspace-fill mr-2" fill="currentColor" height="16" viewBox="0 0 16 16" width="16"
+             xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2V3zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8 5.829 5.854z"/>
+        </svg>
+        Atrás
+      </button>
+    </div>
+
+    <div class="col-8">
+      <!-- Button upload -->
+      <button (click)="getUpload(expenseId)" class="btn btn-success btn-block" type="button">
+        <svg class="bi bi-cloud-arrow-up-fill mr-2" fill="currentColor" height="16" viewBox="0 0 16 16"
+             width="16"
+             xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/>
+        </svg>
+        Subir recibo
+      </button>
+    </div>
+  </div>
+</div>

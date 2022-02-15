@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-12">
+    <ul *ngIf="listExpenses.length > 0; else noResults" class="list-group list-group-flush">
+      <li *ngFor="let expense of listExpenses" class="list-group-item">
+        <app-list-expenses-item
+          (selectedExpenseId)="getSelectedExpenseId($event)"
+          [expenseId]="expense.id">
+        </app-list-expenses-item>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<ng-template #noResults>
+  <div class="row">
+    <div class="col-12 mt-3">
+      <div class="alert alert-success" role="alert">
+        No tiene gastos aun!
+      </div>
+    </div>
+  </div>
+</ng-template>

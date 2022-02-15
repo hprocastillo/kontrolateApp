@@ -8,9 +8,12 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuard],
     children: [
-      {path: 'friends', component: FriendsComponent},
-
-      {path: '**', redirectTo: 'friends'}
+      {
+        path: '', component: FriendsComponent
+      },
+      {
+        path: '**', redirectTo: ''
+      }
     ]
   }
 ];

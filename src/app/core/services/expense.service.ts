@@ -14,19 +14,7 @@ export class ExpenseService {
     this.expenseCollection = afs.collection<Expense>('expenses');
   }
 
-  getExpensesByOutByUserId(outId: string, userId: string) {
-    return this.afs.collection<Expense>('expenses', ref => ref
-      .where('outId', '==', outId)
-      .where('userId', '==', userId)
-      .orderBy('createdAt', 'desc'))
-      .snapshotChanges().pipe(map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Expense;
-        const id = a.payload.doc.id;
-        return {id, ...data};
-      })));
-  }
-
-  getExpensesByOut(outId: string | any) {
+  getExpensesByOut(outId: string) {
     return this.afs.collection<Expense>('expenses', ref => ref
       .where('outId', '==', outId)
       .orderBy('createdAt', 'desc'))
