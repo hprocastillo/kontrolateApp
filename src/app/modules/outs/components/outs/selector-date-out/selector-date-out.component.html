@@ -1,0 +1,15 @@
+<div class="row mt-4 mb-4">
+  <div class="col-7">
+    <!-- SELECT MONTH -->
+    <select class="form-control" [(ngModel)]="month" (change)="getMonth($event.target)">
+      <option *ngFor="let month of months" value="{{month.value}}">{{month.name}}</option>
+    </select>
+  </div>
+
+  <div class="col-4 offset-1">
+    <!-- SELECT YEAR -->
+    <select class="form-control" [(ngModel)]="year" (change)="getYear($event.target)">
+      <option *ngFor="let year of years" value="{{year.value}}">{{year.name}}</option>
+    </select>
+  </div>
+</div>

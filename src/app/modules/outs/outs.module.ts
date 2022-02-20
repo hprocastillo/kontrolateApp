@@ -18,6 +18,7 @@ import {
 } from "./components/expenses/list-expenses/list-expenses-item/list-expenses-item.component";
 import {ModalDeleteExpenseComponent} from './components/expenses/modal-delete-expense/modal-delete-expense.component';
 import {ModalDeleteOutComponent} from './components/outs/modal-delete-out/modal-delete-out.component';
+import { SelectorDateOutComponent } from './components/outs/selector-date-out/selector-date-out.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {ModalDeleteOutComponent} from './components/outs/modal-delete-out/modal-
     ListExpensesItemComponent,
     ModalDeleteExpenseComponent,
     ModalDeleteOutComponent,
+    SelectorDateOutComponent,
   ],
   imports: [
     CommonModule,

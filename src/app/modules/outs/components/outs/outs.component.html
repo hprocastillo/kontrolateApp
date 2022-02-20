@@ -1,8 +1,17 @@
 <ng-container *ngIf="authSvc.user$ | async as user">
 
+  <!-- SELECTOR DATE -->
+  <app-selector-date-out
+    (selectedMonth)="getSelectedMonth($event)"
+    (selectedYear)="getSelectedYear($event)">
+  </app-selector-date-out>
+
+
   <!-- LIST OUTS -->
   <ng-container *ngIf="pageListOuts">
     <app-list-outs
+      [selectedMonth]="selectedMonth"
+      [selectedYear]="selectedYear"
       (selectedOutId)="getSelectedOutId($event)"
       [user]="user">
     </app-list-outs>

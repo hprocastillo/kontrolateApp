@@ -13,6 +13,8 @@ export class OutsComponent {
   pageViewExpense: boolean = false;
 
   // VARIABLES
+  selectedMonth: string | any;
+  selectedYear: string | any;
   selectedOutId: string | undefined;
   selectedExpenseId: string | undefined;
 
@@ -44,6 +46,16 @@ export class OutsComponent {
       this.selectedOutId = event;
       this.showPageViewOut(true);
     }
+  }
+
+  getSelectedMonth(event: string) {
+    this.selectedMonth = event;
+    console.log("este mes seleccionado es: " + this.selectedMonth)
+  }
+
+  getSelectedYear(event: string) {
+    this.selectedYear = event;
+    console.log("este año seleccionado es: " + this.selectedYear)
   }
 
   showPageListOuts(event: boolean) {

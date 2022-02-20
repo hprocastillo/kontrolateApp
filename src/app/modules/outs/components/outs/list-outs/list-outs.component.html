@@ -1,9 +1,9 @@
 <!-- LIST OUTS -->
-<ng-container *ngIf="listOuts.length > 0; else noResults">
+<ng-container *ngIf="listOutsFilter.length > 0; else noResults">
   <div class="row">
     <div class="col-12">
       <ul class="list-group list-group-flush">
-        <li *ngFor="let out of listOuts" class="list-group-item">
+        <li *ngFor="let out of listOutsFilter" class="list-group-item">
 
           <app-list-outs-item
             (selectedOutId)="getSelectedOutId($event)"
